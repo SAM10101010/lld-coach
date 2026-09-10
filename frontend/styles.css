@@ -1,0 +1,10 @@
+.field textarea { min-height: 130px; }
+.scorebar { height: 8px; border-radius: 9999px; background: #e2e8f0; overflow: hidden; }
+.scorebar > div { height: 100%; background: #10b981; }
+.status-pill { font-size: 11px; padding: 2px 10px; border-radius: 9999px; font-weight: 700; }
+.st-DRAFT { background: #e2e8f0; color: #334155; }
+.st-SUBMITTED, .st-EVALUATING { background: #fef3c7; color: #92400e; }
+.st-COMPLETED { background: #d1fae5; color: #065f46; }
+.st-FAILED { background: #fee2e2; color: #991b1b; }
+.spin { display: inline-block; width: 14px; height: 14px; border: 2px solid #a7f3d0; border-top-color: #059669; border-radius: 50%; animation: sp 0.8s linear infinite; vertical-align: -2px; }
+@keyframes sp { to { transform: rotate(360deg); } }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLD Coach — Practice Low-Level Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center font-bold text-slate-900">LC</div>
+        <div>
+          <div class="font-bold text-lg leading-tight">LLD Coach</div>
+          <div class="text-xs text-slate-400">Practice → Submit → Feedback → Retry</div>
+        </div>
+      </div>
+      <nav class="flex gap-2 text-sm">
+        <button data-nav="library" class="navbtn px-3 py-1.5 rounded-lg hover:bg-slate-700">Problems</button>
+        <button data-nav="history" class="navbtn px-3 py-1.5 rounded-lg hover:bg-slate-700">History</button>
+        <a href="/api/health" target="_blank" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white">API ✓</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6">
+    <div id="alert" class="hidden mb-4 p-3 rounded-xl text-sm"></div>
+
+    <!-- Problem library -->
+    <section id="view-library">
+      <div class="flex items-end justify-between mb-4">
+        <div>
+          <h1 class="text-2xl font-bold">Choose a problem</h1>
+          <p class="text-sm text-slate-600">Evaluated against a rubric — not a single reference solution.</p>
+        </div>
+        <span id="providerBadge" class="text-xs px-2 py-1 rounded-full bg-slate-200"></span>
+      </div>
+      <div id="problemCards" class="grid md:grid-cols-3 gap-4"></div>
+      <div class="mt-8 bg-white rounded-2xl p-5 border">
+        <h2 class="font-bold mb-2">How practice works</h2>
+        <ol class="text-sm text-slate-700 list-decimal ml-5 space-y-1">
+          <li>Open a problem and read requirements, constraints, evaluation dimensions.</li>
+          <li><b>Start Attempt</b> → fill 7 structured sections (assumptions → edge cases).</li>
+          <li><b>Save Draft</b> anytime. <b>Submit</b> runs deterministic checks + AI rubric feedback.</li>
+          <li>Review evidence-based feedback, check <b>History</b>, then <b>Try Again</b>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Problem detail -->
+    <section id="view-detail" class="hidden">
+      <button data-nav="library" class="text-sm text-slate-600 hover:underline mb-3">← All problems</button>
+      <div id="problemDetail"></div>
+    </section>
+
+    <!-- Practice -->
+    <section id="view-practice" class="hidden">
+      <button data-nav="library" class="text-sm text-slate-600 hover:underline mb-3">← All problems</button>
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div>
+          <h1 id="practiceTitle" class="text-xl font-bold"></h1>
+          <div id="attemptMeta" class="text-xs text-slate-500"></div>
+        </div>
+        <div class="flex gap-2">
+          <button id="btnSample" class="px-3 py-2 text-sm rounded-xl bg-amber-100 hover:bg-amber-200">Load sample</button>
+          <button id="btnSave" class="px-3 py-2 text-sm rounded-xl bg-slate-200 hover:bg-slate-300">Save Draft</button>
+          <button id="btnSubmit" class="px-4 py-2 text-sm rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Submit → Evaluate</button>
+        </div>
+      </div>
+      <div id="evalStatus" class="mb-3"></div>
+      <div class="grid md:grid-cols-2 gap-4" id="editorGrid"></div>
+    </section>
+
+    <!-- Feedback -->
+    <section id="view-feedback" class="hidden">
+      <button data-nav="history" class="text-sm text-slate-600 hover:underline mb-3">← History</button>
+      <div id="feedbackBody"></div>
+    </section>
+
+    <!-- History -->
+    <section id="view-history" class="hidden">
+      <h1 class="text-2xl font-bold mb-1">Attempt history</h1>
+      <p class="text-sm text-slate-600 mb-4">Improvement over time, not one-time solving.</p>
+      <div class="flex gap-2 mb-4 text-sm">
+        <select id="historyFilter" class="border rounded-xl px-3 py-2">
+          <option value="">All problems</option>
+        </select>
+        <button id="btnRefreshHistory" class="px-3 py-2 rounded-xl bg-slate-200 hover:bg-slate-300">Refresh</button>
+      </div>
+      <div id="historyList" class="space-y-3"></div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 pb-10 text-xs text-slate-500">
+    LLD Coach MVP — deterministic checks + rubric LLM feedback. Submission is persisted before evaluation; FAILED evaluations keep data + retry path.
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
